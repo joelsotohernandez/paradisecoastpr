@@ -16,6 +16,7 @@ public class Answer extends AuditModel {
             sequenceName = "answer_sequence",
             initialValue = 1000
     )
+
     private Long id;
 
     @Column(columnDefinition = "text")
