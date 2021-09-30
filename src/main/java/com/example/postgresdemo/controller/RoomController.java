@@ -14,7 +14,7 @@ public class RoomController {
     @Autowired
     private RoomRepository roomRepository;
 
-    @PostMapping("/rooms")
+    @PostMapping("/roomtest2")
     public Room createQuestion(@Valid @RequestBody Room room) {
         return roomRepository.save(room);
     }
