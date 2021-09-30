@@ -1,34 +1,15 @@
-## Spring Boot, PostgreSQL, JPA, Hibernate REST API Demo
+## Hibernate Tutorials and Demos with Spring Boot and JPA
 
-## Tutorial
+1. [Hibernate One to One Mapping Example with Spring Boot and JPA](https://www.callicoder.com/hibernate-spring-boot-jpa-one-to-one-mapping-example/)
 
-Check out the complete tutorial on the CalliCoder blog -
 
-[Spring Boot, PostgreSQL, JPA, Hibernate RESTful CRUD API Example](https://www.callicoder.com/spring-boot-jpa-hibernate-postgresql-restful-crud-api-example/)
+2. [Hibernate One to Many Mapping Example with Spring Boot and JPA](https://www.callicoder.com/hibernate-spring-boot-jpa-one-to-many-mapping-example/)
 
-## Steps to Setup
 
-**1. Clone the repository**
+3. [Hibernate Many to Many Mapping Example with Spring Boot and JPA](https://www.callicoder.com/hibernate-spring-boot-jpa-many-to-many-mapping-example/)
 
-```bash
-git clone https://github.com/callicoder/spring-boot-postgresql-jpa-hibernate-rest-api-demo.git
-```
 
-**2. Configure PostgreSQL**
+4. [Hibernate Embeddable Type Example with Spring Boot and JPA](https://www.callicoder.com/hibernate-spring-boot-jpa-embeddable-demo/)
 
-First, create a database named `postgres_demo`. Then, open `src/main/resources/application.properties` file and change the spring datasource username and password as per your PostgreSQL installation.
 
-**3. Run the app**
-
-Type the following command from the root directory of the project to run it -
-
-```bash
-mvn spring-boot:run
-```
-
-Alternatively, you can package the application in the form of a JAR file and then run it like so -
-
-```bash
-mvn clean package
-java -jar target/postgres-demo-0.0.1-SNAPSHOT.jar
-```
+5. [Hibernate Composite Primary Key Example with Spring Boot and JPA](https://www.callicoder.com/hibernate-spring-boot-jpa-composite-primary-key-example/)
