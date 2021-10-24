@@ -1,6 +1,5 @@
 package com.paradisecoastpr.paradisedemo.controller;
 
-
 import com.paradisecoastpr.paradisedemo.model.Post;
 import com.paradisecoastpr.paradisedemo.model.Tag;
 import com.paradisecoastpr.paradisedemo.repository.PostRepository;

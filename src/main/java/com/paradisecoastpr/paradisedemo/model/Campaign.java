@@ -1,6 +1,5 @@
 package com.paradisecoastpr.paradisedemo.model;
 
-import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -11,9 +10,9 @@ import java.util.Set;
 
 
 @Entity
-@Table(name = "posts")
+@Table(name = "campaign")
 
-public class Post {
+public class Campaign {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -43,21 +42,31 @@ public class Post {
             cascade = {
                 CascadeType.ALL
             })
-    @JoinTable(name = "post_tags",
-            joinColumns = { @JoinColumn(name = "post_id") },
-            inverseJoinColumns = { @JoinColumn(name = "tag_id") })
-    private  Set<Tag> tags = new HashSet<>();
+    @JoinTable(name = "campaign_post",
+            joinColumns = { @JoinColumn(name = "campaign_id") },
+            inverseJoinColumns = { @JoinColumn(name = "post_id") })
+    private  Set<Post> posts = new HashSet<>();
 
 
-    @ManyToMany(fetch = FetchType.EAGER ,
-            mappedBy = "posts")
-    private Set<Campaign> campaigns = new HashSet<>();
+    public Set<Post> getPosts() {
 
-    public Post() {
+
+
+
+
+
+        return posts;
+    }
+
+    public void setPosts(Set<Post> posts) {
+        this.posts = posts;
+    }
+
+    public Campaign() {
 
     }
 
-    public Post(String title, String description) {
+    public Campaign(String title, String description) {
         this.title = title;
         this.description = description;
 
@@ -105,11 +114,4 @@ public class Post {
     }
 
 
-    public Set<Tag> getTags() {
-        return tags;
-    }
-
-    public void setTags(Set<Tag> tags) {
-        this.tags = tags;
-    }
 }
