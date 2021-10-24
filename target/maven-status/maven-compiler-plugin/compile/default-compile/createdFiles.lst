@@ -1,0 +1,9 @@
+com\paradisecoastpr\paradisedemo\repository\TagRepository.class
+com\paradisecoastpr\paradisedemo\repository\PostRepository.class
+com\paradisecoastpr\paradisedemo\PostgresDemoApplication.class
+com\paradisecoastpr\paradisedemo\controller\TagController.class
+com\paradisecoastpr\paradisedemo\controller\PostController.class
+com\paradisecoastpr\paradisedemo\model\Tag.class
+com\paradisecoastpr\paradisedemo\exception\ResourceNotFoundException.class
+com\paradisecoastpr\paradisedemo\model\Post.class
+com\paradisecoastpr\paradisedemo\model\AuditModel.class
