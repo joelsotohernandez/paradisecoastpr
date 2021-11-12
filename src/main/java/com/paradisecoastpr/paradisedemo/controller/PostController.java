@@ -27,7 +27,7 @@ public class PostController {
         return postRepository.findAll();
     }
 
-    @PutMapping("/posts/{postId}/{tagId}")
+    @PutMapping("/posts/{postId}/add/{tagId}")
     public String  addTag(@PathVariable Long postId, @PathVariable Long tagId)
     {
         Optional<Post> optPost = postRepository.findById(postId);
