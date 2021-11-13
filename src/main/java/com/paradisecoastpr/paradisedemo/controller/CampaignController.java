@@ -33,7 +33,7 @@ public class CampaignController {
         return campaignRepository.save(campaign);
     }
 
-    @PutMapping("/campaigns/{campaignId}/{postId}")
+    @PutMapping("/campaigns/{campaignId}/addPost/{postId}")
     public Campaign addPost(@PathVariable Long postId, @PathVariable Long campaignId)
     {
         Optional<Post> optPost = postRepository.findById(postId);
@@ -51,7 +51,7 @@ public class CampaignController {
         return campaign;
     }
 
-    @PutMapping("/campaigns/{campaignId}/remove/{postId}")
+    @PutMapping("/campaigns/{campaignId}/removePost/{postId}")
     public Campaign removePost(@PathVariable Long postId, @PathVariable Long campaignId)
     {
         Optional<Post> optPost = postRepository.findById(postId);

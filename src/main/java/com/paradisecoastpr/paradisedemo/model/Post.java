@@ -11,7 +11,7 @@ import java.util.Set;
 
 
 @Entity
-@Table(name = "posts")
+@Table(name = "post")
 
 public class Post extends AuditModel{
 
@@ -28,7 +28,6 @@ public class Post extends AuditModel{
     @Size(max = 250)
     private String description;
 
-
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "posted_at")
@@ -39,12 +38,11 @@ public class Post extends AuditModel{
     @Column(name = "last_updated_at")
     private Date lastUpdatedAt = new Date();
 
-
     @ManyToMany(fetch = FetchType.EAGER ,
             cascade = {
                 CascadeType.ALL
             })
-    @JoinTable(name = "post_tags",
+    @JoinTable(name = "post_tag",
             joinColumns = { @JoinColumn(name = "post_id") },
             inverseJoinColumns = { @JoinColumn(name = "tag_id") })
     private  Set<Tag> tags = new HashSet<>();
