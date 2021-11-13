@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Set;
 
 
 @RestController
@@ -16,11 +17,15 @@ public class TagController {
     @Autowired
     private TagRepository tagRepository;
 
-
     @GetMapping("/tags")
     public List<Tag> getTags()
     {
         return tagRepository.findAll();
+    }
+
+    @PostMapping("/tags/search")
+    public Set<Tag> postBody(@RequestBody String name) {
+        return tagRepository.findByNameContaining(name);
     }
 
     @PostMapping("/tags")

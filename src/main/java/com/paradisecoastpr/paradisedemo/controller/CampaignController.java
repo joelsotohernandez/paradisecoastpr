@@ -2,13 +2,12 @@ package com.paradisecoastpr.paradisedemo.controller;
 
 import com.paradisecoastpr.paradisedemo.model.Campaign;
 import com.paradisecoastpr.paradisedemo.model.Post;
-import com.paradisecoastpr.paradisedemo.model.Tag;
 import com.paradisecoastpr.paradisedemo.repository.CampaignRepository;
 import com.paradisecoastpr.paradisedemo.repository.PostRepository;
-import com.paradisecoastpr.paradisedemo.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -29,7 +28,6 @@ public class CampaignController {
     {
         return campaignRepository.findAll();
     }
-
 
     @PostMapping("/campaigns")
     public Campaign createCampaign(@Valid @RequestBody Campaign campaign) {
@@ -66,6 +64,20 @@ public class CampaignController {
             return "yup";
         }
         return "nope";
+    }
+
+    @PostMapping("/campaigns/withpost/{postId}")
+    public List<Campaign> getByPostID(@PathVariable Long postId)
+    {
+        Optional<Post> optPost = postRepository.findById(postId);
+
+        if (!optPost.isPresent()) {
+            throw  new EntityNotFoundException("This post was not found");
+        }
+        Post post = optPost.get();
+        List<Campaign> campaigns = campaignRepository.findByPosts(post);
+        return campaigns;
+
     }
 
 

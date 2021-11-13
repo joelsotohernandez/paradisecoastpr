@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 
 @RestController
@@ -62,9 +63,17 @@ public class PostController {
     }
 
 
+    @PostMapping("/post/tag/search")
+    public Set<Post> postBody(@RequestBody String name) {
+        Set<Tag> tags = tagRepository.findByNameContaining(name);
+        Set<Post> posts = postRepository.findByTagsIn(tags);
+        return posts;
+    }
 
-
-
-
+    @PostMapping("/post/tag/direct/search")
+    public Set<Post> getPostByTag(@RequestBody String name) {
+        Set<Post> posts = postRepository.findByTags_NameContaining(name);
+        return posts;
+    }
 
 }

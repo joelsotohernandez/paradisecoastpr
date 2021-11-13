@@ -8,8 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 @SpringBootApplication
 @EnableJpaAuditing
 @Transactional
-public class PostgresDemoApplication {
+public class ParadiseCoastApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(PostgresDemoApplication.class, args);
+		SpringApplication.run(ParadiseCoastApplication.class, args);
 	}
 }
