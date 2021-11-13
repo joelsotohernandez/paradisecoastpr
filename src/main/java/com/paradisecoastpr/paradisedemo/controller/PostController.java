@@ -7,6 +7,7 @@ import com.paradisecoastpr.paradisedemo.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -21,7 +22,6 @@ public class PostController {
     @Autowired
     private TagRepository tagRepository;
 
-
     @GetMapping("/posts")
     public List<Post> getPosts()
     {
@@ -29,39 +29,39 @@ public class PostController {
     }
 
     @PutMapping("/posts/{postId}/add/{tagId}")
-    public String  addTag(@PathVariable Long postId, @PathVariable Long tagId)
+    public Post addTag(@PathVariable Long postId, @PathVariable Long tagId)
     {
         Optional<Post> optPost = postRepository.findById(postId);
         Optional<Tag> optTag = tagRepository.findById(tagId);
 
-        if (optPost.isPresent() && optTag.isPresent()) {
-            Post post = optPost.get();
-            Tag tag = optTag.get();
-            post.getTags().add(tag);
-            postRepository.save(post);
-            return "yup";
+        if (!optPost.isPresent() || !optTag.isPresent()) {
+            throw  new EntityNotFoundException("This post was not found");
         }
 
-        return "nope";
+        Post post = optPost.get();
+        Tag tag = optTag.get();
+        post.getTags().add(tag);
+        postRepository.save(post);
+        return post;
     }
 
     @PutMapping("/posts/{postId}/remove/{tagId}")
-    public String  removeTag(@PathVariable Long postId, @PathVariable Long tagId)
+    public Post removeTag(@PathVariable Long postId, @PathVariable Long tagId)
     {
         Optional<Post> optPost = postRepository.findById(postId);
         Optional<Tag> optTag = tagRepository.findById(tagId);
 
-        if (optPost.isPresent() && optTag.isPresent()) {
-            Post post = optPost.get();
-            Tag tag = optTag.get();
-            post.getTags().remove(tag);
-            postRepository.save(post);
-            return "yup";
+        if (!optPost.isPresent() || !optTag.isPresent()) {
+            throw  new EntityNotFoundException("This post was not found");
         }
 
-        return "nope";
-    }
+        Post post = optPost.get();
+        Tag tag = optTag.get();
+        post.getTags().remove(tag);
+        postRepository.save(post);
 
+        return post;
+    }
 
     @PostMapping("/post/tag/search")
     public Set<Post> postBody(@RequestBody String name) {

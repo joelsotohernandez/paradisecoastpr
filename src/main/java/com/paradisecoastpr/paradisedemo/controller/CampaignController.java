@@ -35,35 +35,37 @@ public class CampaignController {
     }
 
     @PutMapping("/campaigns/{campaignId}/{postId}")
-    public String  addPost(@PathVariable Long postId, @PathVariable Long campaignId)
+    public Campaign addPost(@PathVariable Long postId, @PathVariable Long campaignId)
     {
         Optional<Post> optPost = postRepository.findById(postId);
         Optional<Campaign> optTag = campaignRepository.findById(campaignId);
 
-        if (optPost.isPresent() && optTag.isPresent()) {
-            Post post = optPost.get();
-            Campaign campaign = optTag.get();
-            campaign.getPosts().add(post);
-            campaignRepository.save(campaign);
-            return "yup";
+        if (!optPost.isPresent() || !optTag.isPresent()) {
+            throw  new EntityNotFoundException("This post was not found");
         }
-        return "nope";
+
+        Post post = optPost.get();
+        Campaign campaign = optTag.get();
+        campaign.getPosts().add(post);
+        campaignRepository.save(campaign);
+        return campaign;
     }
 
     @PutMapping("/campaigns/{campaignId}/remove/{postId}")
-    public String  removePost(@PathVariable Long postId, @PathVariable Long campaignId)
+    public Campaign removePost(@PathVariable Long postId, @PathVariable Long campaignId)
     {
         Optional<Post> optPost = postRepository.findById(postId);
         Optional<Campaign> optTag = campaignRepository.findById(campaignId);
 
         if (optPost.isPresent() && optTag.isPresent()) {
-            Post post = optPost.get();
-            Campaign campaign = optTag.get();
-            campaign.getPosts().remove(post);
-            campaignRepository.save(campaign);
-            return "yup";
+            throw  new EntityNotFoundException("This post was not found");
+
         }
-        return "nope";
+        Post post = optPost.get();
+        Campaign campaign = optTag.get();
+        campaign.getPosts().remove(post);
+        campaignRepository.save(campaign);
+        return campaign;
     }
 
     @PostMapping("/campaigns/withpost/{postId}")
