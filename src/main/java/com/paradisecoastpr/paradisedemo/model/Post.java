@@ -15,6 +15,7 @@ import java.util.Set;
 
 public class Post extends AuditModel{
 
+    //columns////////////////////////////
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -42,7 +43,7 @@ public class Post extends AuditModel{
             cascade = {
                 CascadeType.ALL
             })
-    @JoinTable(name = "post_tag",
+    @JoinTable(name = "xref_post_tag",
             joinColumns = { @JoinColumn(name = "post_id") },
             inverseJoinColumns = { @JoinColumn(name = "tag_id") })
     private  Set<Tag> tags = new HashSet<>();
@@ -52,6 +53,8 @@ public class Post extends AuditModel{
             mappedBy = "posts")
     private Set<Campaign> campaigns = new HashSet<>();
 
+
+    //constructors////////////////////////////
     public Post() { }
 
     public Post(String title, String description) {
@@ -60,42 +63,34 @@ public class Post extends AuditModel{
 
     }
 
+    //Getter/Setters////////////////////////////
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
-
     public String getTitle() {
         return title;
     }
-
     public void setTitle(String title) {
         this.title = title;
     }
-
     public String getDescription() {
         return description;
     }
-
     public void setDescription(String description) {
         this.description = description;
     }
-
     public Date getPostedAt() {
         return postedAt;
     }
-
     public void setPostedAt(Date postedAt) {
         this.postedAt = postedAt;
     }
-
     public Set<Tag> getTags() {
         return tags;
     }
-
     public void setTags(Set<Tag> tags) {
         this.tags = tags;
     }

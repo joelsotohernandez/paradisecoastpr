@@ -24,7 +24,7 @@ public class TagController {
     }
 
     @PostMapping("/tags/search")
-    public Set<Tag> postBody(@RequestBody String name) {
+    public Set<Tag> searchTags(@RequestBody String name) {
         return tagRepository.findByNameContaining(name);
     }
 
