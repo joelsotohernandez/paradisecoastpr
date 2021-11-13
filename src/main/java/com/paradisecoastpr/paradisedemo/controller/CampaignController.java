@@ -22,7 +22,6 @@ public class CampaignController {
     private PostRepository postRepository;
 
 
-
     @GetMapping("/campaigns")
     public List<Campaign> getCampaigns()
     {
@@ -48,6 +47,7 @@ public class CampaignController {
         Campaign campaign = optTag.get();
         campaign.getPosts().add(post);
         campaignRepository.save(campaign);
+
         return campaign;
     }
 
@@ -61,10 +61,12 @@ public class CampaignController {
             throw  new EntityNotFoundException("This post was not found");
 
         }
+
         Post post = optPost.get();
         Campaign campaign = optTag.get();
         campaign.getPosts().remove(post);
         campaignRepository.save(campaign);
+
         return campaign;
     }
 
@@ -74,13 +76,13 @@ public class CampaignController {
         Optional<Post> optPost = postRepository.findById(postId);
 
         if (!optPost.isPresent()) {
-            throw  new EntityNotFoundException("This post was not found");
+            throw new EntityNotFoundException("This post was not found");
         }
+
         Post post = optPost.get();
         List<Campaign> campaigns = campaignRepository.findByPosts(post);
+
         return campaigns;
-
     }
-
 
 }

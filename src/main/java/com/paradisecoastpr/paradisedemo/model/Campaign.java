@@ -8,11 +8,11 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-
 @Entity
 @Table(name = "campaign")
 
-public class Campaign {
+public class Campaign extends AuditModel{
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,7 +25,6 @@ public class Campaign {
     @NotNull
     @Size(max = 250)
     private String description;
-
 
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
@@ -47,29 +46,19 @@ public class Campaign {
             inverseJoinColumns = { @JoinColumn(name = "post_id") })
     private  Set<Post> posts = new HashSet<>();
 
+    public Campaign() { }
+
+    public Campaign(String title, String description) {
+        this.title = title;
+        this.description = description;
+    }
 
     public Set<Post> getPosts() {
-
-
-
-
-
-
         return posts;
     }
 
     public void setPosts(Set<Post> posts) {
         this.posts = posts;
-    }
-
-    public Campaign() {
-
-    }
-
-    public Campaign(String title, String description) {
-        this.title = title;
-        this.description = description;
-
     }
 
     public Long getId() {
@@ -96,7 +85,6 @@ public class Campaign {
         this.description = description;
     }
 
-
     public Date getPostedAt() {
         return postedAt;
     }
@@ -104,14 +92,5 @@ public class Campaign {
     public void setPostedAt(Date postedAt) {
         this.postedAt = postedAt;
     }
-
-    public Date getLastUpdatedAt() {
-        return lastUpdatedAt;
-    }
-
-    public void setLastUpdatedAt(Date lastUpdatedAt) {
-        this.lastUpdatedAt = lastUpdatedAt;
-    }
-
 
 }

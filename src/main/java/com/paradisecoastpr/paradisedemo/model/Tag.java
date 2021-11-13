@@ -12,7 +12,8 @@ import java.util.Set;
 @Entity
 @Table(name = "tags")
 
-public class Tag {
+public class Tag extends AuditModel{
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,12 +25,9 @@ public class Tag {
 
     @ManyToMany(fetch = FetchType.EAGER ,
             mappedBy = "tags")
-
     private Set<Post> posts = new HashSet<>();
 
-    public Tag() {
-
-    }
+    public Tag() { }
 
     public Tag(String name) {
         this.name = name;

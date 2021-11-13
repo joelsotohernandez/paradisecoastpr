@@ -65,14 +65,18 @@ public class PostController {
 
     @PostMapping("/post/tag/search")
     public Set<Post> postBody(@RequestBody String name) {
+
         Set<Tag> tags = tagRepository.findByNameContaining(name);
         Set<Post> posts = postRepository.findByTagsIn(tags);
+
         return posts;
     }
 
     @PostMapping("/post/tag/direct/search")
     public Set<Post> getPostByTag(@RequestBody String name) {
+
         Set<Post> posts = postRepository.findByTags_NameContaining(name);
+
         return posts;
     }
 

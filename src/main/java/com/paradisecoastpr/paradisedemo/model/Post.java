@@ -13,7 +13,8 @@ import java.util.Set;
 @Entity
 @Table(name = "posts")
 
-public class Post {
+public class Post extends AuditModel{
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -53,9 +54,7 @@ public class Post {
             mappedBy = "posts")
     private Set<Campaign> campaigns = new HashSet<>();
 
-    public Post() {
-
-    }
+    public Post() { }
 
     public Post(String title, String description) {
         this.title = title;
@@ -87,7 +86,6 @@ public class Post {
         this.description = description;
     }
 
-
     public Date getPostedAt() {
         return postedAt;
     }
@@ -95,15 +93,6 @@ public class Post {
     public void setPostedAt(Date postedAt) {
         this.postedAt = postedAt;
     }
-
-    public Date getLastUpdatedAt() {
-        return lastUpdatedAt;
-    }
-
-    public void setLastUpdatedAt(Date lastUpdatedAt) {
-        this.lastUpdatedAt = lastUpdatedAt;
-    }
-
 
     public Set<Tag> getTags() {
         return tags;
